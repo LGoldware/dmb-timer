@@ -250,7 +250,7 @@ const DmbTimer = new Lang.Class({
                 "/org/gnome/Shell",
                  "org.gnome.Shell.Extensions",
                  "LaunchExtensionPrefs",
-                new GLib.Variant("(s)", [ "dmb-timer" ]),
+                new GLib.Variant("(s)", [ "dmb-timer@lgoldware" ]),
                 null,
                 Gio.DBusCallFlags.NONE,
                 -1,

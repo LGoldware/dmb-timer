@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schemalist gettext-domain="dmb-timer">
-  <schema id="org.gnome.shell.extensions.dmb-timer" path="/org/gnome/shell/extensions/dmb-timer/">
+<schemalist gettext-domain="dmb-timer@lgoldware">
+  <schema id="org.gnome.shell.extensions.dmb-timer@lgoldware" path="/org/gnome/shell/extensions/dmb-timer@lgoldware/">
     <key type="s" name="start-date">
       <default>''</default>
       <summary>Begin date</summary>

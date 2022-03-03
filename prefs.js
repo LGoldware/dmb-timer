@@ -1,6 +1,6 @@
 const Gtk = imports.gi.Gtk;
 
-const Gettext = imports.gettext.domain("dmb-timer");
+const Gettext = imports.gettext.domain("dmb-timer@lgoldware");
 const _ = Gettext.gettext;
 
 const ExtensionUtils = imports.misc.extensionUtils;
@@ -134,7 +134,7 @@ function buildPrefsWidget() {
       'Created by <a href="mailto:lexagoldware@live.ru">Aliaksei Golovnya</a> 2022 ©',
     );
     appendLabel(
-      '<a href="https://github.com/LGoldware/dmb-timer">Webpage</a>',
+      '<a href="https://github.com/LGoldware/dmb-timer@lgoldware">Webpage</a>',
     );
     appendLabel(`<small>This program comes with absolutely no warranty.
       See the <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License, version 3 or later</a> for details.</small>`);

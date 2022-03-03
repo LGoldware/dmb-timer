@@ -1,0 +1,8 @@
+{
+    "uuid": "dmb-timer",
+    "name": "Demobilization Timer",
+    "description": "Simple timer until the day of the demobilisation.",
+    "version": 1,
+    "shell-version": ["3.28", "3.30"],
+    "url" : "https://github.com/LGoldware/dmb-timer"
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="dmb-timer">
+  <schema id="org.gnome.shell.extensions.dmb-timer" path="/org/gnome/shell/extensions/dmb-timer/">
+    <key type="s" name="start-date">
+      <default>''</default>
+      <summary>Begin date</summary>
+    </key>
+    <key type="s" name="end-date">
+      <default>''</default>
+      <summary>End date</summary>
+    </key>
+    <key type="i" name="current-style-id">
+      <default>2</default>
+      <summary>Current style to view</summary>
+    </key>
+  </schema>
+</schemalist>

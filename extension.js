@@ -155,6 +155,9 @@ let selectedIdStyle;
 let arrayOfButtons;
 let arrayOfButtonsSignals;
 let settingsSignal;
+let popupStateSignal;
+let settingsUpdateStartDateSignal;
+let settingsUpdateEndDateSignal;
 
 // ==================================================
 function refreshUI() {
@@ -243,7 +246,7 @@ const DmbTimer = new Lang.Class({
             
         // BOTTON SECTION
 		let settingsItem = new PopupMenu.PopupMenuItem('Settings');
-        settingsItem.connect('activate', Lang.bind(this, function(){                     
+        settingsSignal = settingsItem.connect('activate', Lang.bind(this, function(){                     
             let dbus = Gio.DBus.session;
             dbus.call(
                 "org.gnome.Shell", 
@@ -265,7 +268,7 @@ const DmbTimer = new Lang.Class({
         this.menu.addMenuItem(settingsItem);
 
         // EVENTS MENU
-        settingsSignal = this.menu.connect("open-state-changed", function(menu, isOpen) {
+        popupStateSignal = this.menu.connect("open-state-changed", function(menu, isOpen) {
             if (isOpen) {
                 refreshUI();
                 _connectUiTimer();
@@ -306,13 +309,13 @@ const DmbTimer = new Lang.Class({
             endDate = new Date(endDate_value);
         
         // reaction of changes
-        settings.connect("changed::start-date", function(k, b) {
+        settingsUpdateStartDateSignal = settings.connect("changed::start-date", function(k, b) {
             let value = settings.get_string("start-date");
             startDate = new Date(value);
             
             refreshUI();
         });
-        settings.connect("changed::end-date", function(k, b) {
+        settingsUpdateEndDateSignal = settings.connect("changed::end-date", function(k, b) {
             let value = settings.get_string("end-date");
             endDate = new Date(value);
             
@@ -330,8 +333,26 @@ const DmbTimer = new Lang.Class({
             Mainloop.source_remove(icon_timer);
             icon_timer = null;
         }
+
+        if(settingsSignal){
+            settingsItem.disconnect(settingsSignal);
+            settingsSignal = null
+        }
         
-        this.menu.disconnect(settingsSignal);
+        if(popupStateSignal){
+            this.menu.disconnect(popupStateSignal);
+            popupStateSignal= null;
+        }
+
+        if(settingsUpdateStartDateSignal){
+            settings.disconnect(settingsUpdateStartDateSignal);
+            settingsUpdateStartDateSignal = null;
+        }
+
+        if(settingsUpdateEndDateSignal){
+            settings.disconnect(settingsUpdateEndDateSignal);
+            settingsUpdateEndDateSignal = null;
+        }
 
         for (var i = 0; i < arrayOfButtons.length; i++) {
             arrayOfButtons[i].disconnect(arrayOfButtonsSignals[i]);

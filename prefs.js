@@ -58,7 +58,6 @@ function buildPrefsWidget() {
 
   // begin date
   let startDate_value = settings.get_string("start-date");
-  print("startDate_value : " + startDate_value);
   if(startDate_value.length == 0){
       let date = new Date();
       startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
@@ -67,19 +66,14 @@ function buildPrefsWidget() {
   else
       startDate = new Date(startDate_value);
 
-  print(startDate.toISOString());
-
   // end date
   let endDate_value = settings.get_string("end-date");
-  print("endDate_value : " + endDate_value);
   if(endDate_value.length == 0){
       endDate = new Date(startDate.getFullYear() + 1, startDate.getMonth(), startDate.getDate() - 1)
       settings.set_string("end-date", endDate.toISOString());
   }
   else
       endDate = new Date(endDate_value);
-
-  print(endDate.toISOString());
 
   let startCalendar = new Gtk.Calendar();
   let endCalendar = new Gtk.Calendar();
@@ -118,7 +112,7 @@ function buildPrefsWidget() {
       0,
     );
 
-    function appendLabel(text) {
+    function appendLabel(text, margin) {
       frame.pack_start(
         new Gtk.Label({
           label: text,
@@ -126,18 +120,26 @@ function buildPrefsWidget() {
         }),
         false,
         false,
-        10,
+        margin,
       );
     }
 
     appendLabel(
       'Created by <a href="mailto:lexagoldware@live.ru">Aliaksei Golovnya</a> 2022 ©',
+      0
     );
     appendLabel(
-      '<a href="https://github.com/LGoldware/dmb-timer@lgoldware">Webpage</a>',
+      '<a href="https://github.com/LGoldware/dmb-timer">Webpage</a>', 
+      12
     );
-    appendLabel(`<small>This program comes with absolutely no warranty.
-      See the <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License, version 3 or later</a> for details.</small>`);
+    appendLabel(
+      `<small>This program comes with absolutely no warranty.</small>`, 
+      0
+    );
+    appendLabel(
+      `<small>See the <a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License, version 3 or later</a> for details.</small>`, 
+      0
+    );
   }
 
   notebook.show_all();

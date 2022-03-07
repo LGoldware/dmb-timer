@@ -142,6 +142,7 @@ const formats = [
 
 let formatted_label;
 let icon_label;
+let settings_item; 
 
 let ui_timer;
 let icon_timer;
@@ -245,8 +246,8 @@ const DmbTimer = new Lang.Class({
         }
             
         // BOTTON SECTION
-		let settingsItem = new PopupMenu.PopupMenuItem('Settings');
-        settingsSignal = settingsItem.connect('activate', Lang.bind(this, function(){                     
+        settings_item = new PopupMenu.PopupMenuItem('Settings');
+        settingsSignal = settings_item.connect('activate', Lang.bind(this, function(){                     
             let dbus = Gio.DBus.session;
             dbus.call(
                 "org.gnome.Shell", 
@@ -265,7 +266,7 @@ const DmbTimer = new Lang.Class({
 		// FILL MENU
 		this.menu.box.add(formatted_label);
         this.menu.addMenuItem(styleMenuExpander);
-        this.menu.addMenuItem(settingsItem);
+        this.menu.addMenuItem(settings_item);
 
         // EVENTS MENU
         popupStateSignal = this.menu.connect("open-state-changed", function(menu, isOpen) {
@@ -335,7 +336,7 @@ const DmbTimer = new Lang.Class({
         }
 
         if(settingsSignal){
-            settingsItem.disconnect(settingsSignal);
+            settings_item.disconnect(settingsSignal);
             settingsSignal = null
         }
         
@@ -358,6 +359,8 @@ const DmbTimer = new Lang.Class({
             arrayOfButtons[i].disconnect(arrayOfButtonsSignals[i]);
             arrayOfButtonsSignals[i] = null;
         }
+
+        settings = null;
 	}
 });
 
